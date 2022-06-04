@@ -423,7 +423,7 @@ export const KeysQuest: Quest = {
     {
       name: "Deck",
       after: [],
-      completed: () => get("_deckCardsDrawn") > 0,
+      completed: () => !have($item`Deck of Every Card`) || get("_deckCardsDrawn") > 0,
       do: () => cliExecute("cheat tower"),
       limit: { tries: 1 },
       freeaction: true,
