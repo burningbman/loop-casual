@@ -18,6 +18,7 @@ import {
   myDaycount,
   myFullness,
   myInebriety,
+  myLevel,
   myPrimestat,
   mySpleenUse,
   print,
@@ -60,7 +61,7 @@ export const DietQuest: Quest = {
       after: [],
       completed: () =>
         myDaycount() > 1 || (myFullness() >= args.stomach && myInebriety() >= args.liver),
-      ready: () => myBasestat(myPrimestat()) >= 149 || myAdventures() <= 1,
+      ready: () => (myLevel() >= 13 && myBasestat(myPrimestat()) > 150) || myAdventures() <= 1,
       do: (): void => {
         if (have($item`astral six-pack`)) {
           use($item`astral six-pack`);
@@ -309,9 +310,9 @@ function cookBookBatMenu(): MenuItem<MenuData>[] {
 function menu(): MenuItem<MenuData>[] {
   const spaghettiBreakfast =
     have($item`spaghetti breakfast`) &&
-    myFullness() === 0 &&
-    get("_timeSpinnerFoodAvailable") === "" &&
-    !get("_spaghettiBreakfastEaten")
+      myFullness() === 0 &&
+      get("_timeSpinnerFoodAvailable") === "" &&
+      !get("_spaghettiBreakfastEaten")
       ? 1
       : 0;
 
@@ -379,7 +380,7 @@ function consumeDiet(diet: Diet<MenuData>, mpa: number) {
 
   print(`Diet Plan:`);
   for (const dietEntry of plannedDietEntries) {
-    print(`${dietEntry.target()} ${dietEntry.helpers().join(",")}`);
+    print(`${dietEntry.quantity} ${dietEntry.target()} with ${dietEntry.helpers().join(",")}`);
   }
 
   while (sumNumbers(plannedDietEntries.map((e) => e.quantity)) > 0) {

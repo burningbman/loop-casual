@@ -1,12 +1,20 @@
 import {
+  chew,
   cliExecute,
+  currentMcd,
+  Effect,
+  Item,
   myHp,
   myLevel,
   myMaxhp,
   myPrimestat,
   runChoice,
   runCombat,
+  Skill,
+  Stat,
+  sweetSynthesis,
   totalFreeRests,
+  use,
   useSkill,
   visitUrl,
 } from "kolmafia";
@@ -45,6 +53,16 @@ function primestatId(): number {
   return 1;
 }
 
+const snapperPotion = new Map<Stat, Item>();
+snapperPotion.set($stat`Muscle`, $item`vial of humanoid growth hormone`);
+snapperPotion.set($stat`Mysticality`, $item`non-Euclidean angle`);
+snapperPotion.set($stat`Moxie`, $item`Shantix™`);
+
+const synthEffect = new Map<Stat, Effect>();
+synthEffect.set($stat`Muscle`, $effect`Synthesis: Movement`);
+synthEffect.set($stat`Mysticality`, $effect`Synthesis: Learning`);
+synthEffect.set($stat`Moxie`, $effect`Synthesis: Style`);
+
 export const LevelingQuest: Quest = {
   name: "Leveling",
   tasks: [
@@ -59,6 +77,20 @@ export const LevelingQuest: Quest = {
       do: () => visitUrl("place.php?whichplace=campaway&action=campaway_sky"),
       freeaction: true,
       limit: { tries: 1 },
+    },
+    {
+      name: "MCD",
+      after: [],
+      completed: () => currentMcd() >= 10 || myLevel() >= args.levelto,
+      do: () => {
+        cliExecute("mcd 10");
+        const potion = snapperPotion.get(myPrimestat());
+        potion && chew(potion);
+        const synth = synthEffect.get(myPrimestat());
+        synth && sweetSynthesis(synth);
+      },
+      limit: { tries: 1 },
+      freeaction: true,
     },
     {
       name: "Daycare",
@@ -88,7 +120,7 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "Bastille",
-      after: [],
+      after: ["MCD"],
       ready: () => have($item`Bastille Battalion control rig`),
       completed: () => get("_bastilleGames") !== 0 || myLevel() >= args.levelto,
       do: () =>
@@ -96,7 +128,7 @@ export const LevelingQuest: Quest = {
       limit: { tries: 1 },
       freeaction: true,
       outfit: {
-        modifier: "exp",
+        modifier: `exp, 10 ${myPrimestat()} experience percent`,
       },
     },
     {
@@ -197,13 +229,13 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "God Lobster",
-      after: [],
       acquire: [
         {
           item: $item`makeshift garbage shirt`,
           get: () => cliExecute("fold makeshift garbage shirt"),
         },
       ],
+      after: ["MCD"],
       ready: () => have($familiar`God Lobster`),
       completed: () => get("_godLobsterFights") >= 3 || myLevel() >= args.levelto,
       do: (): void => {
@@ -213,7 +245,7 @@ export const LevelingQuest: Quest = {
       },
       combat: new CombatStrategy().killHard(),
       outfit: {
-        modifier: "mainstat, 4exp, monster level percent",
+        modifier: `mainstat, 10 ${myPrimestat()} experience percent, 4exp, monster level percent`,
         equip: $items`makeshift garbage shirt, unbreakable umbrella`,
         familiar: $familiar`God Lobster`,
       },
@@ -237,7 +269,7 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "Sausage Fights",
-      after: [],
+      after: ["MCD"],
       acquire: [
         {
           item: $item`makeshift garbage shirt`,
@@ -260,7 +292,7 @@ export const LevelingQuest: Quest = {
         )
         .abort(), // error on everything except sausage goblin
       outfit: {
-        modifier: "mainstat, 4exp",
+        modifier: `mainstat, 10 ${myPrimestat()} experience percent, 4exp`,
         equip: $items`Kramco Sausage-o-Matic™, makeshift garbage shirt, Pocket Professor memory chip`,
         familiar: $familiar`Pocket Professor`,
       },
@@ -269,7 +301,7 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "Neverending Party",
-      after: [],
+      after: ["MCD"],
       acquire: [
         {
           item: $item`makeshift garbage shirt`,
@@ -295,7 +327,7 @@ export const LevelingQuest: Quest = {
         })
         .killHard(),
       outfit: {
-        modifier: "mainstat, 4exp, monster level percent",
+        modifier: `mainstat, 10 ${myPrimestat()} experience percent, 4exp, monster level percent`,
         equip: $items`makeshift garbage shirt, unbreakable umbrella`,
         familiar: $familiar`Left-Hand Man`,
       },
@@ -325,7 +357,7 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "Leaflet",
-      after: [],
+      after: ["MCD"],
       ready: () => myLevel() >= 9,
       completed: () => get("leafletCompleted"),
       do: (): void => {
@@ -336,7 +368,7 @@ export const LevelingQuest: Quest = {
       freeaction: true,
       limit: { tries: 1 },
       outfit: {
-        modifier: "exp",
+        modifier: `10 ${myPrimestat()} experience percent, exp`,
       },
     },
   ],

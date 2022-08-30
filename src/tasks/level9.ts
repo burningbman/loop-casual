@@ -103,7 +103,7 @@ const Oil: Task[] = [
     after: ["Start Peaks"],
     completed: () => get("oilPeakProgress") === 0,
     do: $location`Oil Peak`,
-    outfit: { modifier: "ML" },
+    outfit: { modifier: "ML", avoid: $items`red shirt` },
     combat: new CombatStrategy().kill(),
     limit: { tries: 6 },
   },

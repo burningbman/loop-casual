@@ -262,11 +262,11 @@ const ManorBasement: Task[] = [
     after: ["Fulminate"],
     completed: () => have($item`wine bomb`) || step("questL11Manor") >= 3,
     do: $location`The Haunted Boiler Room`,
-    outfit: { modifier: "ML", equip: $items`unstable fulminate` },
+    outfit: { modifier: "ML", equip: $items`unstable fulminate`, avoid: $items`red shirt` },
     choices: { 902: 2 },
     combat: new CombatStrategy()
-      .kill($monster`monstrous boiler`)
-      .banish($monsters`coaltergeist, steam elemental`),
+      .killHard($monster`monstrous boiler`)
+      .banish(...$monsters`coaltergeist, steam elemental`),
     limit: { soft: 10 },
   },
   {

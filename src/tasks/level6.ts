@@ -121,9 +121,9 @@ export const OrganQuest: Quest = {
       after: ["Start"],
       completed: () => have($item`observational glasses`),
       do: $location`The Laugh Floor`,
-      outfit: { modifier: "+combat" },
-      combat: new CombatStrategy().kill(
-        $monsters`Carbuncle Top, Larry of the Field of Signs, Victor the Insult Comic Hellhound`
+      outfit: { modifier: "+combat", avoid: $items`HOA zombie eyes` },
+      combat: new CombatStrategy().killHard(
+        ...$monsters`Carbuncle Top, Larry of the Field of Signs, Victor the Insult Comic Hellhound`
       ),
       limit: { soft: 30 },
     },

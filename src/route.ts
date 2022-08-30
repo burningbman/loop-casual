@@ -17,6 +17,7 @@ export const routing: string[] = [
   "Toot/Finish",
   "Leveling/Cloud Talk",
   "Leveling/Daycare",
+  "Leveling/MCD",
   "Leveling/Bastille",
   "Leveling/Leaflet",
   "Leveling/Snojo",
