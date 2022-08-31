@@ -320,7 +320,12 @@ export const LevelingQuest: Quest = {
     {
       name: "Machine Elf",
       after: [],
-      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
+      acquire: [
+        {
+          item: $item`makeshift garbage shirt`,
+          get: () => cliExecute("fold makeshift garbage shirt"),
+        },
+      ],
       ready: () => have($familiar`Machine Elf`),
       completed: () => get("_machineTunnelsAdv") >= 5 || myLevel() >= args.levelto,
       do: $location`The Deep Machine Tunnels`,
