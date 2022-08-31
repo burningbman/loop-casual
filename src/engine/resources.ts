@@ -343,10 +343,10 @@ const familiarPants =
 const familiarEquip = have($item`astral pet sweater`)
   ? $item`astral pet sweater`
   : have($familiar`Cornbeefadon`)
-  ? $item`amulet coin`
-  : have($familiar`Mu`)
-  ? $item`luck incense`
-  : null;
+    ? $item`amulet coin`
+    : have($familiar`Mu`)
+      ? $item`luck incense`
+      : null;
 const familiarGear = [
   ...$items`Daylight Shavings Helmet, Buddy Bjorn, Stephen's lab coat, hewn moon-rune spoon`,
   ...(familiarEquip ? [familiarEquip] : []),
@@ -358,8 +358,8 @@ const familiarEffectBonus = 15;
 const runawayFamiliar = have($familiar`Frumious Bandersnatch`)
   ? $familiar`Frumious Bandersnatch`
   : have($familiar`Pair of Stomping Boots`)
-  ? $familiar`Pair of Stomping Boots`
-  : $familiar`none`;
+    ? $familiar`Pair of Stomping Boots`
+    : $familiar`none`;
 
 function availableFamiliarRunaways(otherBonus: number) {
   if (runawayFamiliar === $familiar`none`) return 0;
@@ -369,7 +369,7 @@ function availableFamiliarRunaways(otherBonus: number) {
       familiarGearBonus +
       otherBonus +
       (have($effect`Open Heart Surgery`) ? 10 : 0)) /
-      5
+    5
   );
 }
 

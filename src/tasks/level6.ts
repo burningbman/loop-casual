@@ -123,7 +123,7 @@ export const OrganQuest: Quest = {
       do: $location`The Laugh Floor`,
       outfit: { modifier: "+combat", avoid: $items`HOA zombie eyes` },
       combat: new CombatStrategy().killHard(
-        ...$monsters`Carbuncle Top, Larry of the Field of Signs, Victor the Insult Comic Hellhound`
+        $monsters`Carbuncle Top, Larry of the Field of Signs, Victor the Insult Comic Hellhound`
       ),
       limit: { soft: 30 },
     },

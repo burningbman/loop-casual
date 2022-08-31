@@ -10,11 +10,9 @@ import {
   myPrimestat,
   runChoice,
   runCombat,
-  Skill,
   Stat,
   sweetSynthesis,
   totalFreeRests,
-  use,
   useSkill,
   visitUrl,
 } from "kolmafia";
@@ -229,13 +227,8 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "God Lobster",
-      acquire: [
-        {
-          item: $item`makeshift garbage shirt`,
-          get: () => cliExecute("fold makeshift garbage shirt"),
-        },
-      ],
-      after: ["MCD"],
+      after: ['MCD'],
+      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
       ready: () => have($familiar`God Lobster`),
       completed: () => get("_godLobsterFights") >= 3 || myLevel() >= args.levelto,
       do: (): void => {
@@ -270,12 +263,7 @@ export const LevelingQuest: Quest = {
     {
       name: "Sausage Fights",
       after: ["MCD"],
-      acquire: [
-        {
-          item: $item`makeshift garbage shirt`,
-          get: () => cliExecute("fold makeshift garbage shirt"),
-        },
-      ],
+      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
       ready: () =>
         have($familiar`Pocket Professor`) &&
         have($item`Kramco Sausage-o-Matic™`) &&
@@ -302,12 +290,7 @@ export const LevelingQuest: Quest = {
     {
       name: "Neverending Party",
       after: ["MCD"],
-      acquire: [
-        {
-          item: $item`makeshift garbage shirt`,
-          get: () => cliExecute("fold makeshift garbage shirt"),
-        },
-      ],
+      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
       completed: () => get("_neverendingPartyFreeTurns") >= 10 || myLevel() >= args.levelto,
       do: $location`The Neverending Party`,
       choices: { 1322: 2, 1324: 5 },
@@ -337,12 +320,7 @@ export const LevelingQuest: Quest = {
     {
       name: "Machine Elf",
       after: [],
-      acquire: [
-        {
-          item: $item`makeshift garbage shirt`,
-          get: () => cliExecute("fold makeshift garbage shirt"),
-        },
-      ],
+      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
       ready: () => have($familiar`Machine Elf`),
       completed: () => get("_machineTunnelsAdv") >= 5 || myLevel() >= args.levelto,
       do: $location`The Deep Machine Tunnels`,
