@@ -2221,10 +2221,10 @@ kind-of@^6.0.2:
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kolmafia@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-3.4.0.tgz#133d2863075f7e8fb1b91a5e1fd06a022b385245"
-  integrity sha512-FuzhCdFIw/rkeofEWL7j7B28TxGqxxb0OxtgZ+PdmXmqePLOIMs1bSUQlW7zTu+BF/Su1KkPKFqWjBIvAvAlXQ==
+kolmafia@^5.26781.0:
+  version "5.26834.0"
+  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.26834.0.tgz#ee8d95e3aaec5102132fc9a8fa3857e30623c448"
+  integrity sha512-aLnVlsDkEsPT4HkW/W1M+Rrev4ygzeUdPSyAqCBe6tG2nYChPhV7EGgwmagQYwbwDMElqvjJ7SnfGhZDuqktwg==
 
 levn@^0.4.1:
   version "0.4.1"
