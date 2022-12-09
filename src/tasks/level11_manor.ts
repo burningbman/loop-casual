@@ -142,7 +142,7 @@ const Manor2: Task[] = [
     outfit: () => {
       if (myClass() === $class`Seal Clubber` && have($skill`Batter Up!`) && myFury() >= 5)
         return { equip: $items`Meat Tenderizer is Murder` };
-      else return { equip: $items`Pantsgiving` };
+      else return { equip: have($item`Pantsgiving`) ? $items`Pantsgiving` : [] };
     },
     delay: () => (have($item`Lord Spookyraven's spectacles`) ? 5 : 0),
     limit: { soft: 10 },
@@ -265,8 +265,8 @@ const ManorBasement: Task[] = [
     outfit: { modifier: "ML", equip: $items`unstable fulminate`, avoid: $items`red shirt` },
     choices: { 902: 2 },
     combat: new CombatStrategy()
-      .kill($monster`monstrous boiler`)
-      .banish($monsters`coaltergeist, steam elemental`),
+      .killHard($monster`monstrous boiler`)
+      .banish(...$monsters`coaltergeist, steam elemental`),
     limit: { soft: 10 },
   },
   {

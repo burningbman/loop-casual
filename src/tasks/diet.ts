@@ -416,9 +416,10 @@ function consumeDiet(diet: Diet<MenuData>, mpa: number) {
           if (menuItem.effect === $effect`Refined Palate`) {
             cliExecute(`genie effect ${menuItem.effect}`);
           } else {
-            consumeSafe(dietEntry.quantity, menuItem.item, mpa, menuItem.data);
+            consumeSafe(quantity, menuItem.item, mpa, menuItem.data);
           }
         }
+        print(`Recorded ${quantity} ${dietEntry.target().item.name}`);
         dietEntry.quantity -= quantity;
       }
     }

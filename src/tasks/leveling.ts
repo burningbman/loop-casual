@@ -227,8 +227,13 @@ export const LevelingQuest: Quest = {
     },
     {
       name: "God Lobster",
-      after: ['MCD'],
-      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
+      after: ["MCD"],
+      acquire: [
+        {
+          item: $item`makeshift garbage shirt`,
+          get: () => cliExecute("fold makeshift garbage shirt"),
+        },
+      ],
       ready: () => have($familiar`God Lobster`),
       completed: () => get("_godLobsterFights") >= 3 || myLevel() >= args.levelto,
       do: (): void => {
@@ -263,7 +268,12 @@ export const LevelingQuest: Quest = {
     {
       name: "Sausage Fights",
       after: ["MCD"],
-      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
+      acquire: [
+        {
+          item: $item`makeshift garbage shirt`,
+          get: () => cliExecute("fold makeshift garbage shirt"),
+        },
+      ],
       ready: () =>
         have($familiar`Pocket Professor`) &&
         have($item`Kramco Sausage-o-Matic™`) &&
@@ -290,7 +300,12 @@ export const LevelingQuest: Quest = {
     {
       name: "Neverending Party",
       after: ["MCD"],
-      acquire: [{ item: $item`makeshift garbage shirt`, get: () => cliExecute("fold makeshift garbage shirt") }],
+      acquire: [
+        {
+          item: $item`makeshift garbage shirt`,
+          get: () => cliExecute("fold makeshift garbage shirt"),
+        },
+      ],
       completed: () => get("_neverendingPartyFreeTurns") >= 10 || myLevel() >= args.levelto,
       do: $location`The Neverending Party`,
       choices: { 1322: 2, 1324: 5 },
@@ -312,7 +327,7 @@ export const LevelingQuest: Quest = {
       outfit: {
         modifier: `mainstat, 10 ${myPrimestat()} experience percent, 4exp, monster level percent`,
         equip: $items`makeshift garbage shirt, unbreakable umbrella`,
-        familiar: $familiar`Left-Hand Man`,
+        familiar: have($familiar`Left-Hand Man`) ? $familiar`Left-Hand Man` : $familiar`none`,
       },
       limit: { tries: 11 },
       freecombat: true,
